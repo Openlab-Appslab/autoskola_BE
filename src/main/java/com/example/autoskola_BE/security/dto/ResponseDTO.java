@@ -1,4 +1,4 @@
-package com.example.autoskola_BE.dto;
+package com.example.autoskola_BE.security.dto;
 
 public class ResponseDTO {
     private String sessionId;

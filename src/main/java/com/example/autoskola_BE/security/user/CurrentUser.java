@@ -1,4 +1,4 @@
-package com.example.autoskola_BE.user;
+package com.example.autoskola_BE.security.user;
 
 
 import org.springframework.security.core.GrantedAuthority;
@@ -11,6 +11,8 @@ import java.util.List;
 public class CurrentUser implements UserDetails {
     private String username;
     private String password;
+    private List<GrantedAuthority> authorities;
+    private String authority;
 
     public void setUsername(String username) {
         this.username = username;
@@ -20,10 +22,16 @@ public class CurrentUser implements UserDetails {
         this.password = password;
     }
 
+    public void setAuthority(String authority) {
+        this.authorities = List.of(new SimpleGrantedAuthority(authority));
+    }
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(new SimpleGrantedAuthority("ADMIN"));
+        return authorities;
     }
+
+
 
     @Override
     public String getPassword() {

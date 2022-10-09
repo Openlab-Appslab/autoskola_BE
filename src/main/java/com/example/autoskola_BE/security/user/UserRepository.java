@@ -1,4 +1,4 @@
-package com.example.autoskola_BE.user;
+package com.example.autoskola_BE.security.user;
 
 
 import org.springframework.data.jpa.repository.JpaRepository;

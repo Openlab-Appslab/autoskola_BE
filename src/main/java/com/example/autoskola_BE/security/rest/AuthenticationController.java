@@ -1,8 +1,8 @@
-package com.example.autoskola_BE.rest;
+package com.example.autoskola_BE.security.rest;
 
-import com.example.autoskola_BE.dto.ResponseDTO;
-import com.example.autoskola_BE.dto.UserDTO;
-import com.example.autoskola_BE.session.InMemorySessionRegistry;
+import com.example.autoskola_BE.security.dto.ResponseDTO;
+import com.example.autoskola_BE.security.dto.UserDTO;
+import com.example.autoskola_BE.security.session.InMemorySessionRegistry;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;

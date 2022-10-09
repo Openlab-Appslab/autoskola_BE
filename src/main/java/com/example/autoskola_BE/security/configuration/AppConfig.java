@@ -1,7 +1,7 @@
-package com.example.autoskola_BE.configuration;
+package com.example.autoskola_BE.security.configuration;
 
-import com.example.autoskola_BE.session.SessionFilter;
-import com.example.autoskola_BE.user.CurrentUserService;
+import com.example.autoskola_BE.security.session.SessionFilter;
+import com.example.autoskola_BE.security.user.CurrentUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -45,6 +45,7 @@ public class AppConfig extends WebSecurityConfigurerAdapter {
 
         http.authorizeRequests()
                 .antMatchers("/api/login").permitAll()
+                .antMatchers("/api/list").hasAnyAuthority("USER")
                 .anyRequest().authenticated();
 
         http.addFilterBefore(

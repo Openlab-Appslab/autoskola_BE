@@ -1,4 +1,4 @@
-package com.example.autoskola_BE.session;
+package com.example.autoskola_BE.security.session;
 
 import org.springframework.stereotype.Component;
 

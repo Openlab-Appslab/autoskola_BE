@@ -1,4 +1,4 @@
-package com.example.autoskola_BE.user;
+package com.example.autoskola_BE.security.user;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -8,14 +8,10 @@ import org.springframework.stereotype.Service;
 @Service
 public class CurrentUserService implements UserDetailsService {
 
-//    private final UserInMemoryRepository inMemoryRepository;
     private final UserRepository repository;
 
     @Autowired
-    public CurrentUserService(
-//            UserInMemoryRepository inMemoryRepository,
-                              UserRepository repository) {
-//        this.inMemoryRepository = inMemoryRepository;
+    public CurrentUserService(UserRepository repository) {
         this.repository = repository;
     }
     @Override
@@ -26,6 +22,7 @@ public class CurrentUserService implements UserDetailsService {
             final CurrentUser currentUser = new CurrentUser();
             currentUser.setUsername(user.getUsername());
             currentUser.setPassword(user.getPassword());
+            currentUser.setAuthority(user.getAuthority());
 
             return currentUser;
         }
@@ -34,12 +31,5 @@ public class CurrentUserService implements UserDetailsService {
             throw new UsernameNotFoundException("Failed to find user with username: " + username);
         }
 
-//       return  null;
-//
-//        if (currentUser == null) {
-//            throw new UsernameNotFoundException("Failed to find user with username: " + username);
-//        }
-
-//        return user;
     }
 }

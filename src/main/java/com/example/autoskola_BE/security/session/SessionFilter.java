@@ -1,7 +1,7 @@
-package com.example.autoskola_BE.session;
+package com.example.autoskola_BE.security.session;
 
-import com.example.autoskola_BE.user.CurrentUser;
-import com.example.autoskola_BE.user.CurrentUserService;
+import com.example.autoskola_BE.security.user.CurrentUserService;
+import com.example.autoskola_BE.security.user.CurrentUser;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
