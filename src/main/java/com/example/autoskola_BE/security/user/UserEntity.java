@@ -25,4 +25,6 @@ public class UserEntity {
     @Column(nullable = false)
     private String authority;
 
+    @Column
+    private String confirmPassword = "BASIC USER";
 }

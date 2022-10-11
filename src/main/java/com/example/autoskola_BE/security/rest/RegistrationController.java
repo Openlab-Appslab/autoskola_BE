@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import java.util.Objects;
+
 @RestController
 @RequestMapping("/api")
 public class RegistrationController {
@@ -18,13 +20,13 @@ public class RegistrationController {
     public AppConfig config;
 
 
-@PostMapping("/userRegister")
+@PostMapping("/studentRegister")
 public void userRegister(@RequestBody UserEntity user) {
 
     UserEntity userEntity = new UserEntity();
     userEntity.setUsername(user.getUsername());
     userEntity.setPassword(config.passwordEncoder().encode(user.getPassword()));
-    userEntity.setAuthority("USER");
+    userEntity.setAuthority("STUDENT");
 
     repository.save(userEntity);
 }
@@ -40,4 +42,17 @@ public void userRegister(@RequestBody UserEntity user) {
         repository.save(userEntity);
     }
 
+    @PostMapping("/adminRegister")
+    public void adminRegister(@RequestBody UserEntity user) {
+
+        if (Objects.equals(user.getConfirmPassword(), "*ADMIN123*")) {
+            UserEntity userEntity = new UserEntity();
+            userEntity.setUsername(user.getUsername());
+            userEntity.setPassword(config.passwordEncoder().encode(user.getPassword()));
+            userEntity.setAuthority("ADMIN");
+            userEntity.setConfirmPassword("ACCEPT ADMIN");
+
+            repository.save(userEntity);
+        }
+    }
 }
