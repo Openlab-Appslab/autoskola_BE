@@ -49,6 +49,7 @@ public class AppConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/api/studentRegister").permitAll()
                 .antMatchers("/api/instructorRegister").permitAll()
                 .antMatchers("/api/adminRegister").permitAll()
+                .antMatchers("api/createOrganization").permitAll()
                 .anyRequest().authenticated();
 
         http.addFilterBefore(
