@@ -1,11 +1,14 @@
 package com.example.autoskola_BE.security.user;
 
 
+import com.example.autoskola_BE.autoskolaOrganization.AutoskolaOrganization;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -27,4 +30,8 @@ public class UserEntity {
 
     @Column
     private String confirmPassword = "BASIC USER";
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "userEntity")
+    private Set<AutoskolaOrganization> organizationSet;
 }
