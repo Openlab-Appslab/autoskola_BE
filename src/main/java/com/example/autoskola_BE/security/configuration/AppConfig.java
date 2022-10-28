@@ -5,6 +5,7 @@ import com.example.autoskola_BE.security.user.CurrentUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -49,7 +50,10 @@ public class AppConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/api/studentRegister").permitAll()
                 .antMatchers("/api/instructorRegister").permitAll()
                 .antMatchers("/api/adminRegister").permitAll()
-                .antMatchers("api/createOrganization").permitAll()
+                .antMatchers("/api/createOrganization").permitAll()
+                .antMatchers("/api/organization").permitAll()
+                .antMatchers(HttpMethod.GET).permitAll()
+                .antMatchers(HttpMethod.POST).permitAll()
                 .anyRequest().authenticated();
 
         http.addFilterBefore(

@@ -18,11 +18,16 @@ public class InMemorySessionRegistry {
 
         final String sessionId = generateSessionId();
         SESSIONS.put(sessionId, username);
+//        System.out.println("Registered session: " + sessionId + " for user: " + username);
+//        System.out.println("Current sessions: " + SESSIONS.get(sessionId));
         return sessionId;
     }
 
     public String getUsernameForSession(final String sessionId) {
-        return SESSIONS.get(sessionId);
+       String sessionId2 = sessionId.substring(7);
+        System.out.println("Current sessions: " + SESSIONS.get(sessionId2));
+       return SESSIONS.get(sessionId2);
+
     }
 
     private String generateSessionId() {
