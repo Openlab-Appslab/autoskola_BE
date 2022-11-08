@@ -1,6 +1,7 @@
 package com.example.autoskola_BE.autoskolaOrganization;
 
 
+import com.example.autoskola_BE.images.Image;
 import com.example.autoskola_BE.security.user.UserEntity;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -26,5 +27,8 @@ public class AutoskolaOrganization {
 
     @ManyToOne
     UserEntity userEntity;
+
+    @OneToOne
+    private Image image;
 
 }
