@@ -11,6 +11,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import javax.xml.parsers.SAXParser;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -36,5 +37,9 @@ public class AutoskolaOrganization {
     @JsonIgnore
     @OneToOne(mappedBy = "autoskolaOrganization")
     private WaitingRoom waitingRoom;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "userEntityMembers")
+    private Set<UserEntity> userEntitySet;
 
 }

@@ -40,4 +40,7 @@ public class UserEntity {
     @OneToOne(mappedBy = "userEntity")
     private WaitingRoom waitingRoom;
 
+    @ManyToOne
+    private AutoskolaOrganization userEntityMembers = null;
+
 }
