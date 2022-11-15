@@ -25,6 +25,8 @@ public class AutoskolaOrganization {
 
     private String name_organization;
 
+    private Long price_organization;
+
     private String description_organization;
 
 
