@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class AutoskolaOrganizationServiceImpl implements AutoskolaOrganizationService{
 
@@ -29,5 +31,10 @@ public class AutoskolaOrganizationServiceImpl implements AutoskolaOrganizationSe
 
         autoskolaOrganization.setUserEntity(userRepository.findByUsername(currentUserService.getUsername()));
         autoskolaOrganizationRepository.save(autoskolaOrganization);
+    }
+
+    @Override
+    public List<AutoskolaOrganization> returnAllOrganization() {
+          return (List<AutoskolaOrganization>) autoskolaOrganizationRepository.findAll();
     }
 }
