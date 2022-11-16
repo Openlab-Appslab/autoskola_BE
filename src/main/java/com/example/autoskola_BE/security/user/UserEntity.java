@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -37,8 +38,8 @@ public class UserEntity {
     private Set<AutoskolaOrganization> organizationSet;
 
     @JsonIgnore
-    @OneToOne(mappedBy = "userEntity")
-    private WaitingRoom waitingRoom;
+    @OneToMany(mappedBy = "userEntity")
+    private List<WaitingRoom> waitingRoomList;
 
     @ManyToOne
     private AutoskolaOrganization userEntityMembers = null;

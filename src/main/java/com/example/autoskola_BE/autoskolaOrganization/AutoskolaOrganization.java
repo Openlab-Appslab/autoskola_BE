@@ -11,6 +11,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import javax.xml.parsers.SAXParser;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -37,8 +38,8 @@ public class AutoskolaOrganization {
     private Image image;
 
     @JsonIgnore
-    @OneToOne(mappedBy = "autoskolaOrganization")
-    private WaitingRoom waitingRoom;
+    @OneToMany(mappedBy = "autoskolaOrganization")
+    private List<WaitingRoom> waitingRoomList;
 
     @JsonIgnore
     @OneToMany(mappedBy = "userEntityMembers")

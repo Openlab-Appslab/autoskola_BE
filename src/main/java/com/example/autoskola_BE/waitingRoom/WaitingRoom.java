@@ -19,13 +19,13 @@ public class WaitingRoom {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id_waiting;
 
-    @OneToOne
+    @ManyToOne
     private AutoskolaOrganization autoskolaOrganization;
 
 //    @OneToMany
 //    private List<UserEntity> userEntityList;
 
-    @OneToOne
+    @ManyToOne
     private UserEntity userEntity;
 
 }
