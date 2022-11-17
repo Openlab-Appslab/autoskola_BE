@@ -5,9 +5,12 @@ import com.example.autoskola_BE.security.user.CurrentUser;
 import com.example.autoskola_BE.security.user.UserEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 @RestController
 public class WaitingRoomController {
@@ -24,6 +27,11 @@ public class WaitingRoomController {
     void addMembersToOrganization(@RequestBody AutoskolaOrganization autoskolaOrganization, @RequestBody UserEntity userEntity)
     {
           waitingRoomService.saveStudentToOrganization(autoskolaOrganization, userEntity);
+    }
+
+    @GetMapping("/returnAllWaitingRoom")
+    List<WaitingRoom> returnAllWaitingRoom(@AuthenticationPrincipal CurrentUser currentUser){
+        return waitingRoomService.returnUsersWaitingRoom(currentUser);
     }
 
     }

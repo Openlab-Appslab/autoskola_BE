@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
@@ -33,5 +34,10 @@ public class WaitingRoomServiceImpl implements WaitingRoomService {
         Optional<UserEntity> currentUser = userRepository.findById(userEntity.getId());
         currentUser.get().setUserEntityMembers(autoskolaOrganization);
 
+    }
+
+    @Override
+    public List<WaitingRoom> returnUsersWaitingRoom(@AuthenticationPrincipal CurrentUser currentUser) {
+        return waitingRoomRepository.findAllByUserEntity(userRepository.findByUsername(currentUser.getUsername()));
     }
 }
