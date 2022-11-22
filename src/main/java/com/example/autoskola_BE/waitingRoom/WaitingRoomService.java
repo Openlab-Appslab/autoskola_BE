@@ -16,4 +16,6 @@ public interface WaitingRoomService {
 
     List<WaitingRoom> returnUsersWaitingRoom(@AuthenticationPrincipal CurrentUser currentUser);
 
+    void removeFromWaitingRoom(WaitingRoom waitingRoom);
+
 }

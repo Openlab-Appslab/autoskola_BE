@@ -34,6 +34,11 @@ public class WaitingRoomController {
         return waitingRoomService.returnUsersWaitingRoom(currentUser);
     }
 
+    @PostMapping("/removeFromWaitingRoom")
+        void removeFromWaitingRoom(@RequestBody WaitingRoom waitingRoom){
+           waitingRoomService.removeFromWaitingRoom(waitingRoom);
+        }
+
     }
 
 

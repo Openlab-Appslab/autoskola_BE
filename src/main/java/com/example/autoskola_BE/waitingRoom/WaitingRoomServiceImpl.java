@@ -40,4 +40,9 @@ public class WaitingRoomServiceImpl implements WaitingRoomService {
     public List<WaitingRoom> returnUsersWaitingRoom(@AuthenticationPrincipal CurrentUser currentUser) {
         return waitingRoomRepository.findAllByUserEntity(userRepository.findByUsername(currentUser.getUsername()));
     }
+
+    @Override
+    public void removeFromWaitingRoom(WaitingRoom waitingRoom) {
+        waitingRoomRepository.delete(waitingRoom);
+    }
 }
