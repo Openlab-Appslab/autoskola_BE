@@ -23,7 +23,7 @@ public class AutoskolaOrganizationServiceImpl implements AutoskolaOrganizationSe
     private ImageRepository  imageRepository;
 
     @Override
-    public void addOrganization(AutoskolaOrganization autoskolaOrganization, @AuthenticationPrincipal CurrentUser currentUserService) {
+    public AutoskolaOrganization addOrganization(AutoskolaOrganization autoskolaOrganization, @AuthenticationPrincipal CurrentUser currentUserService) {
 
 
         Long image = imageRepository.findTopByOrderByIdDesc().get().getId();
@@ -31,6 +31,8 @@ public class AutoskolaOrganizationServiceImpl implements AutoskolaOrganizationSe
 
         autoskolaOrganization.setUserEntity(userRepository.findByUsername(currentUserService.getUsername()));
         autoskolaOrganizationRepository.save(autoskolaOrganization);
+
+        return autoskolaOrganization;
     }
 
     @Override
