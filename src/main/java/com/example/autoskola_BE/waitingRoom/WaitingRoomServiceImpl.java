@@ -33,6 +33,7 @@ public class WaitingRoomServiceImpl implements WaitingRoomService {
 
         Optional<UserEntity> currentUser = userRepository.findById(userEntity.getId());
         currentUser.get().setUserEntityMembers(autoskolaOrganization);
+        userRepository.save(currentUser.get());
 
     }
 
