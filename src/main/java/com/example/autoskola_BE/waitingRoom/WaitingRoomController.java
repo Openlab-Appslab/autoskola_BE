@@ -3,6 +3,7 @@ package com.example.autoskola_BE.waitingRoom;
 import com.example.autoskola_BE.autoskolaOrganization.AutoskolaOrganization;
 import com.example.autoskola_BE.security.user.CurrentUser;
 import com.example.autoskola_BE.security.user.UserEntity;
+import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,27 +20,30 @@ public class WaitingRoomController {
     private WaitingRoomServiceImpl waitingRoomService;
 
     @PostMapping("/saveToWaitingRoom")
-    void saveToWaitingRoom(@RequestBody WaitingRoom waitingRoom, @AuthenticationPrincipal CurrentUser currentUserService){
+    void saveToWaitingRoom(@RequestBody WaitingRoom waitingRoom, @AuthenticationPrincipal CurrentUser currentUserService) {
         waitingRoomService.saveToWaitingRoom(waitingRoom, currentUserService);
     }
 
     @PostMapping("/addMembersToOrganization")
-    void addMembersToOrganization(@RequestBody AutoskolaOrganization autoskolaOrganization, @RequestBody UserEntity userEntity)
-    {
-          waitingRoomService.saveStudentToOrganization(autoskolaOrganization, userEntity);
+    void addMembersToOrganization(@RequestBody WaitingRoom waitingRoom) {
+        waitingRoomService.saveStudentToOrganization(waitingRoom.getAutoskolaOrganization(), waitingRoom.getUserEntity());
     }
 
+
     @GetMapping("/returnAllWaitingRoom")
-    List<WaitingRoom> returnAllWaitingRoom(@AuthenticationPrincipal CurrentUser currentUser){
+    List<WaitingRoom> returnAllWaitingRoom(@AuthenticationPrincipal CurrentUser currentUser) {
         return waitingRoomService.returnUsersWaitingRoom(currentUser);
     }
 
     @PostMapping("/removeFromWaitingRoom")
-        void removeFromWaitingRoom(@RequestBody WaitingRoom waitingRoom){
-           waitingRoomService.removeFromWaitingRoom(waitingRoom);
-        }
-
+    void removeFromWaitingRoom(@RequestBody WaitingRoom waitingRoom) {
+        waitingRoomService.removeFromWaitingRoom(waitingRoom);
     }
 
+    @GetMapping("/returnAllStudentsInWaitingRoom")
+    List<UserEntity> returnAllStudentsInWaitingRoom(@AuthenticationPrincipal CurrentUser currentUser) {
+        return waitingRoomService.returnAllStudentsInWaitingRoom(currentUser);
 
+    }
+}
 

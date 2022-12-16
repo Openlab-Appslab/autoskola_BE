@@ -1,6 +1,7 @@
 package com.example.autoskola_BE.waitingRoom;
 
 import com.example.autoskola_BE.autoskolaOrganization.AutoskolaOrganization;
+import com.example.autoskola_BE.autoskolaOrganization.AutoskolaOrganizationRepository;
 import com.example.autoskola_BE.security.user.CurrentUser;
 import com.example.autoskola_BE.security.user.UserEntity;
 import com.example.autoskola_BE.security.user.UserRepository;
@@ -20,6 +21,9 @@ public class WaitingRoomServiceImpl implements WaitingRoomService {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private AutoskolaOrganizationRepository autoskolaOrganizationRepository;
 
     @Override
     public void saveToWaitingRoom(WaitingRoom waitingRoom, @AuthenticationPrincipal CurrentUser currentUserService) {
@@ -45,5 +49,11 @@ public class WaitingRoomServiceImpl implements WaitingRoomService {
     @Override
     public void removeFromWaitingRoom(WaitingRoom waitingRoom) {
         waitingRoomRepository.delete(waitingRoom);
+    }
+
+    @Override
+    public List<UserEntity> returnAllStudentsInWaitingRoom(@AuthenticationPrincipal CurrentUser currentUser) {
+        AutoskolaOrganization autoskolaOrganization = autoskolaOrganizationRepository.findByUserEntity(userRepository.findByUsername(currentUser.getUsername()));
+        return userRepository.findAllByUserEntityMembers(autoskolaOrganization);
     }
 }
