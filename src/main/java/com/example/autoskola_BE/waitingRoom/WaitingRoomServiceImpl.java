@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -52,8 +53,22 @@ public class WaitingRoomServiceImpl implements WaitingRoomService {
     }
 
     @Override
-    public List<UserEntity> returnAllStudentsInWaitingRoom(@AuthenticationPrincipal CurrentUser currentUser) {
+    public List<UserEntity> returnAllStudentsInOrganization(@AuthenticationPrincipal CurrentUser currentUser) {
         AutoskolaOrganization autoskolaOrganization = autoskolaOrganizationRepository.findByUserEntity(userRepository.findByUsername(currentUser.getUsername()));
         return userRepository.findAllByUserEntityMembers(autoskolaOrganization);
+    }
+
+    @Override
+    public List<UserEntity> returnAllStudentsInWaitingRoom(@AuthenticationPrincipal CurrentUser currentUser) {
+        AutoskolaOrganization autoskolaOrganization = autoskolaOrganizationRepository.findByUserEntity(userRepository.findByUsername(currentUser.getUsername()));
+
+        ArrayList<UserEntity> userEntities = new ArrayList<>();
+
+        List<WaitingRoom> waitingRoomList = waitingRoomRepository.findAllByAutoskolaOrganization(autoskolaOrganization);
+        for (WaitingRoom waitingRoom : waitingRoomList) {
+            userEntities.add(waitingRoom.getUserEntity());
+        }
+
+        return userEntities;
     }
 }

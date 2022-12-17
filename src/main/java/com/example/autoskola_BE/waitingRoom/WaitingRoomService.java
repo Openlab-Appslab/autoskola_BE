@@ -18,6 +18,7 @@ public interface WaitingRoomService {
 
     void removeFromWaitingRoom(WaitingRoom waitingRoom);
 
-    List<UserEntity> returnAllStudentsInWaitingRoom(@AuthenticationPrincipal CurrentUser currentUser);
+    List<UserEntity> returnAllStudentsInOrganization(@AuthenticationPrincipal CurrentUser currentUser);
 
+    List<UserEntity> returnAllStudentsInWaitingRoom(@AuthenticationPrincipal CurrentUser currentUser);
 }

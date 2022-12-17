@@ -40,6 +40,12 @@ public class WaitingRoomController {
         waitingRoomService.removeFromWaitingRoom(waitingRoom);
     }
 
+    @GetMapping("/returnAllStudentsInOrganization")
+    List<UserEntity> returnAllStudentsInOrganization(@AuthenticationPrincipal CurrentUser currentUser) {
+        return waitingRoomService.returnAllStudentsInOrganization(currentUser);
+
+    }
+
     @GetMapping("/returnAllStudentsInWaitingRoom")
     List<UserEntity> returnAllStudentsInWaitingRoom(@AuthenticationPrincipal CurrentUser currentUser) {
         return waitingRoomService.returnAllStudentsInWaitingRoom(currentUser);
