@@ -47,23 +47,24 @@ public class AutoskolaOrganizationServiceTest {
 
         Optional<AutoskolaOrganization> returnedOrganization = Optional.ofNullable(autoskolaOrganizationService.addOrganization(autoskolaOrganization, user));
 
-
         Assertions.assertTrue(returnedOrganization.isPresent(), "Organization was  save");
         Assertions.assertFalse(false, "Organization is null");
-//        Assertions.assertEquals(1, returnedOrganization.get().getId_organization(), "The organization returned was the same as the mock");
     }
 
     @Test
     @DisplayName("Test if all organizations are returned")
     public void testReturnAllOrganization() {
-//        List<AutoskolaOrganization> listOfOrganization = List.of(new AutoskolaOrganization(1L, "Test", 500L, "Test"));
-//        when(repository.findAll()).thenReturn(listOfOrganization);
+        List<AutoskolaOrganization> listOfOrganization = new java.util.ArrayList<>(List.of(new AutoskolaOrganization()));
+        AutoskolaOrganization autoskolaOrganization = new AutoskolaOrganization();
+        autoskolaOrganization.setId_organization(1L);
+        autoskolaOrganization.setName_organization("Test");
+        autoskolaOrganization.setPrice_organization(500L);
+        autoskolaOrganization.setDescription_organization("Test");
+        doReturn(listOfOrganization).when(repository).findAll();
 
-//
-//        doReturn(listOfOrganization).when(repository.findAll());
+        List<AutoskolaOrganization> returnedOrganization = autoskolaOrganizationService.returnAllOrganization();
 
-//
-//        doReturn(autoskolaOrganizationService.returnAllOrganization()).when(autoskolaOrganizationService).returnAllOrganization();
-    }
+        Assertions.assertEquals(1, returnedOrganization.size(), "findAll should return 1 organization");
+ }
 
 }
