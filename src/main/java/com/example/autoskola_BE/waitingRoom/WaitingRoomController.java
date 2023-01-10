@@ -51,5 +51,10 @@ public class WaitingRoomController {
         return waitingRoomService.returnAllStudentsInWaitingRoom(currentUser);
 
     }
+
+    @GetMapping("/returnCurrentOrganization")
+    public AutoskolaOrganization getCurreAutoskolaOrganization(@AuthenticationPrincipal CurrentUser currentUser) {
+        return waitingRoomService.returnCurrentAutoskolaOrganization(currentUser);
+    }
 }
 

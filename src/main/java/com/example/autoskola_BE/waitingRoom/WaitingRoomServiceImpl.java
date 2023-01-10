@@ -71,4 +71,8 @@ public class WaitingRoomServiceImpl implements WaitingRoomService {
 
         return userEntities;
     }
+
+    public AutoskolaOrganization returnCurrentAutoskolaOrganization(@AuthenticationPrincipal CurrentUser currentUser) {
+        return autoskolaOrganizationRepository.findByUserEntity(userRepository.findByUsername(currentUser.getUsername()));
+    }
 }
