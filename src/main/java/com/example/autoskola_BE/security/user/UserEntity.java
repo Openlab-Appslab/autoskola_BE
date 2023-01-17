@@ -33,6 +33,9 @@ public class UserEntity {
     @Column
     private String confirmPassword = "BASIC USER";
 
+    @Column
+    private int countOfTheory = 36;
+
     @JsonIgnore
     @OneToMany(mappedBy = "userEntity")
     private Set<AutoskolaOrganization> organizationSet;
