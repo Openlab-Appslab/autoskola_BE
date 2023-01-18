@@ -13,6 +13,7 @@ public class CurrentUser implements UserDetails {
     private String password;
     private List<GrantedAuthority> authorities;
     private String authority;
+    private boolean isEnabled;
 
     public void setUsername(String username) {
         this.username = username;
@@ -26,12 +27,14 @@ public class CurrentUser implements UserDetails {
         this.authorities = List.of(new SimpleGrantedAuthority(authority));
     }
 
+    public void setEnabled(boolean enabled) {
+        isEnabled = enabled;
+    }
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return authorities;
     }
-
-
 
     @Override
     public String getPassword() {
@@ -60,6 +63,8 @@ public class CurrentUser implements UserDetails {
 
     @Override
     public boolean isEnabled() {
+//        return this.isEnabled;
         return true;
     }
+
 }

@@ -36,6 +36,12 @@ public class UserEntity {
     @Column
     private int countOfTheory = 36;
 
+    @Column(nullable = true)
+    private String email;
+
+    @Column(nullable = true)
+    private boolean isEnabled;
+
     @JsonIgnore
     @OneToMany(mappedBy = "userEntity")
     private Set<AutoskolaOrganization> organizationSet;

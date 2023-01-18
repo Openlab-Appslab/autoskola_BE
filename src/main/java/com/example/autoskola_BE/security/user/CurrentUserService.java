@@ -23,7 +23,7 @@ public class CurrentUserService implements UserDetailsService {
             currentUser.setUsername(user.getUsername());
             currentUser.setPassword(user.getPassword());
             currentUser.setAuthority(user.getAuthority());
-
+            currentUser.setEnabled(user.isEnabled());
             return currentUser;
         }
 
