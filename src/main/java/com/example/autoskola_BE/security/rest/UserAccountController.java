@@ -16,6 +16,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.HashMap;
+import java.util.Map;
+
 @Getter
 @Setter
 @Controller
@@ -44,25 +47,29 @@ public class UserAccountController {
 
 
     @RequestMapping(value="/register", method =  RequestMethod.POST)
-    public ResponseEntity<String>registerUser(@RequestBody UserEntity user)
+    public ResponseEntity<Object> registerUser(@RequestBody UserEntity user)
     {
+        Map<String, Object> response = new HashMap<String, Object>();
 
         UserEntity existingUser = userRepository.findByEmailIgnoreCase(user.getEmail());
         UserEntity existingUsername = userRepository.findByUsernameIgnoreCase(user.getUsername());
+
         if(existingUser != null)
         {
-            return new ResponseEntity<>("Email už existuje!", HttpStatus.BAD_REQUEST);
+            response.put("status", "error");
+            response.put("message", "Email už existuje!");
+            return new ResponseEntity<Object>(response, HttpStatus.OK);
 
         }
 
         else if(existingUsername != null)
         {
-
-            return new ResponseEntity<>("Používateľské meno už existuje!", HttpStatus.BAD_REQUEST);
+            response.put("status", "error");
+            response.put("message", "Používateľské meno už existuje!");
+            return new ResponseEntity<Object>(response, HttpStatus.OK);
         }
         else
         {
-
             user.setPassword(config.passwordEncoder().encode(user.getPassword()));
             user.setAuthority("USER");
             userRepository.save(user);
@@ -74,16 +81,18 @@ public class UserAccountController {
             SimpleMailMessage mailMessage = new SimpleMailMessage();
             mailMessage.setTo(user.getEmail());
             mailMessage.setSubject("Dokončite registráciu!");
-            mailMessage.setFrom("BAZARAPP");
+            mailMessage.setFrom("AUTOSKOLA");
             mailMessage.setText("Tu potvrďte svoju registráciu: "
-                    +"http://localhost:4200/confirmVerification?token="+confirmationToken.getConfirmationToken());
+                    +"http://localhost:4200/register?token="+confirmationToken.getConfirmationToken());
 
             emailSenderService.sendEmail(mailMessage);
-
         }
-        return new ResponseEntity<>("Potvrď prihlásenie cez Email", HttpStatus.BAD_REQUEST);
 
-          }
+        response.put("status", "success");
+        response.put("message", "Potvrď registráciu cez Email");
+        return new ResponseEntity<Object>(response, HttpStatus.OK);
+
+    }
 
     @GetMapping("/registrationMessage")
     public String registrationMessage() {
