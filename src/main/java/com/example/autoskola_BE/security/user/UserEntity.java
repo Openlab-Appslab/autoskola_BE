@@ -36,6 +36,9 @@ public class UserEntity {
     @Column
     private int countOfTheory = 36;
 
+    @Column
+    private int countOfDriving = 36;
+
     @Column(nullable = true)
     private String email;
 

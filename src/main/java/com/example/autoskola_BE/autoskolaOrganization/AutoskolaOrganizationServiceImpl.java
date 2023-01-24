@@ -50,4 +50,14 @@ public class AutoskolaOrganizationServiceImpl implements AutoskolaOrganizationSe
             userRepository.save(currentStudent);
         }
     }
+
+    public void degreaseStudentDrivingHours(UserEntity userEntity, @AuthenticationPrincipal CurrentUser currentUser) {
+        AutoskolaOrganization autoskolaOrganization = autoskolaOrganizationRepository.findByUserEntity(userRepository.findByUsername(currentUser.getUsername()));
+        UserEntity currentStudent = userRepository.findByUsername(userEntity.getUsername());
+
+        if (autoskolaOrganization.getId_organization() == currentStudent.getUserEntityMembers().getId_organization()) {
+            currentStudent.setCountOfDriving(currentStudent.getCountOfDriving() - 1);
+            userRepository.save(currentStudent);
+        }
+    }
 }

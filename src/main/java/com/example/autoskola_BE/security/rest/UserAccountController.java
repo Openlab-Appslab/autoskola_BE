@@ -71,7 +71,7 @@ public class UserAccountController {
         else
         {
             user.setPassword(config.passwordEncoder().encode(user.getPassword()));
-            user.setAuthority("USER");
+            user.setAuthority("STUDENT");
             userRepository.save(user);
 
             ConfirmationToken confirmationToken = new ConfirmationToken(user);

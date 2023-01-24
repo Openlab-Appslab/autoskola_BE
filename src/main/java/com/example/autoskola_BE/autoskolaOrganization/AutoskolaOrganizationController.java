@@ -26,8 +26,13 @@ public class AutoskolaOrganizationController {
         return autoskolaOrganizationService.returnAllOrganization();
     }
 
-    @PostMapping("/degreaseHours")
+    @PostMapping("/degreaseTheoryHours")
     void degreaseStudentsHours(@RequestBody UserEntity userEntity, @AuthenticationPrincipal CurrentUser currentUser){
         autoskolaOrganizationService.degreaseStudentHours(userEntity, currentUser);
+    }
+
+    @PostMapping("/degreaseDrivingHours")
+    void degreaseStudentsDrivingHours(@RequestBody UserEntity userEntity, @AuthenticationPrincipal CurrentUser currentUser){
+        autoskolaOrganizationService.degreaseStudentDrivingHours(userEntity, currentUser);
     }
 }
