@@ -18,6 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 @Getter
 @Setter
@@ -71,9 +72,24 @@ public class UserAccountController {
         else
         {
             user.setPassword(config.passwordEncoder().encode(user.getPassword()));
-            user.setAuthority("STUDENT");
-            userRepository.save(user);
 
+            if(Objects.equals(user.getConfirmPassword(), "*ADMIN123*")){
+                user.setAuthority("ADMIN");
+                user.setConfirmPassword("ACCEPT_ADMIN");
+                userRepository.save(user);
+            }
+
+            else if(Objects.equals(user.getConfirmPassword(), "INSTRUCTOR")){
+                user.setAuthority("INSTRUCTOR");
+                user.setConfirmPassword("ACCEPT_INSTRUCTOR");
+                userRepository.save(user);
+            }
+            else{
+
+            user.setAuthority("STUDENT");
+            user.setConfirmPassword("ACCEPT_STUDENT");
+            userRepository.save(user);
+        }
             ConfirmationToken confirmationToken = new ConfirmationToken(user);
 
             confirmationTokenRepository.save(confirmationToken);

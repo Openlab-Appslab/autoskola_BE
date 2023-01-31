@@ -33,10 +33,10 @@ public class UserEntity {
     @Column
     private String confirmPassword = "BASIC USER";
 
-    @Column
+    @Column(nullable = true)
     private int countOfTheory = 36;
 
-    @Column
+    @Column(nullable = true)
     private int countOfDriving = 36;
 
     @Column(nullable = true)
