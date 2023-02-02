@@ -2,6 +2,7 @@ package com.example.autoskola_BE.security.user;
 
 
 import com.example.autoskola_BE.autoskolaOrganization.AutoskolaOrganization;
+import com.example.autoskola_BE.usersReservation.UsersReservation;
 import com.example.autoskola_BE.waitingRoom.WaitingRoom;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
@@ -55,5 +56,9 @@ public class UserEntity {
 
     @ManyToOne
     private AutoskolaOrganization userEntityMembers = null;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "userEntity")
+    private List<UsersReservation> usersReservationList;
 
 }
