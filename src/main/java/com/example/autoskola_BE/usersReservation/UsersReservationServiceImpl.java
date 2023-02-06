@@ -28,28 +28,46 @@ public class UsersReservationServiceImpl implements UsersReservationService{
     public void addReservation(UsersReservation reservation, CurrentUser currentUser) {
 
         reservation.setUserEntity(userRepository.findByUsername(currentUser.getUsername()));
-        reservationRepository.save(reservation);
+
 
         ReservationDay currentReservationDay = reservationDayRepository.findByReservationDate(reservation.getReservationDay().getReservationDate());
 
+
         if (Objects.equals(reservation.getTime(), "7.00")){
-            currentReservationDay.setClock7(false);
+            if (currentReservationDay.isClock7()) {
+                reservationRepository.save(reservation);
+                currentReservationDay.setClock7(false);
+            }
         }
 
         if (Objects.equals(reservation.getTime(), "9.00")){
-            currentReservationDay.setClock9(false);
+            if (currentReservationDay.isClock9()) {
+                reservationRepository.save(reservation);
+                currentReservationDay.setClock9(false);
+            }
         }
 
         if (Objects.equals(reservation.getTime(), "12.00")){
-            currentReservationDay.setClock12(false);
+            if (currentReservationDay.isClock12()) {
+                reservationRepository.save(reservation);
+                currentReservationDay.setClock12(false);
+            }
         }
 
         if (Objects.equals(reservation.getTime(), "15.00")){
-            currentReservationDay.setClock15(false);
+            if (currentReservationDay.isClock15()) {
+                reservationRepository.save(reservation);
+                currentReservationDay.setClock15(false);
+            }
+
         }
 
         if (Objects.equals(reservation.getTime(), "17.00")){
-            currentReservationDay.setClock17(false);
+            if (currentReservationDay.isClock17()) {
+                reservationRepository.save(reservation);
+                currentReservationDay.setClock17(false);
+            }
+
         }
 
         reservationDayRepository.save(currentReservationDay);
