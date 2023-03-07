@@ -1,14 +1,21 @@
 package com.example.autoskola_BE.usersReservation;
 
+import com.example.autoskola_BE.autoskolaOrganization.AutoskolaOrganization;
+import com.example.autoskola_BE.autoskolaOrganization.AutoskolaOrganizationRepository;
 import com.example.autoskola_BE.reservation.ReservationDay;
 import com.example.autoskola_BE.reservation.ReservationDayRepository;
 import com.example.autoskola_BE.security.user.CurrentUser;
+import com.example.autoskola_BE.security.user.UserEntity;
 import com.example.autoskola_BE.security.user.UserRepository;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.servlet.ServletComponentScan;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Service;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -23,6 +30,8 @@ public class UsersReservationServiceImpl implements UsersReservationService{
 
     @Autowired
     private ReservationDayRepository reservationDayRepository;
+    @Autowired
+    private AutoskolaOrganizationRepository autoskolaOrganizationRepository;
 
     @Override
     public void addReservation(UsersReservation reservation, CurrentUser currentUser) {
@@ -30,7 +39,7 @@ public class UsersReservationServiceImpl implements UsersReservationService{
         reservation.setUserEntity(userRepository.findByUsername(currentUser.getUsername()));
 
 
-        ReservationDay currentReservationDay = reservationDayRepository.findByReservationDate(reservation.getReservationDay().getReservationDate());
+        ReservationDay currentReservationDay = reservationDayRepository.findByReservationDateAndAutoskolaOrganization(reservation.getReservationDay().getReservationDate(), reservation.getUserEntity().getUserEntityMembers());
 
 
         if (Objects.equals(reservation.getTime(), "7.00")){
@@ -71,5 +80,22 @@ public class UsersReservationServiceImpl implements UsersReservationService{
         }
 
         reservationDayRepository.save(currentReservationDay);
+    }
+
+    @Override
+    public List<UsersReservation> returnAllRequests(@AuthenticationPrincipal CurrentUser currentUser){
+        UserEntity userEntity = userRepository.findByUsername(currentUser.getUsername());
+        AutoskolaOrganization autoskolaOrganization = autoskolaOrganizationRepository.findByUserEntity(userEntity);
+
+        List<ReservationDay> reservationDayList =  reservationDayRepository.findAllByAutoskolaOrganization(autoskolaOrganization);
+
+        ArrayList<UsersReservation> usersReservationArrayList = new ArrayList<>();
+
+        for(ReservationDay reservationDay : reservationDayList){
+
+        }
+
+        return (List<UsersReservation>) reservationRepository.findAll();
+
     }
 }

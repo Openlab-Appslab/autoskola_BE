@@ -1,5 +1,6 @@
 package com.example.autoskola_BE.reservation;
 
+import com.example.autoskola_BE.autoskolaOrganization.AutoskolaOrganization;
 import com.example.autoskola_BE.security.user.UserEntity;
 import com.example.autoskola_BE.usersReservation.UsersReservation;
 import com.example.autoskola_BE.waitingRoom.WaitingRoom;
@@ -31,5 +32,8 @@ public class ReservationDay {
     @JsonIgnore
     @OneToMany(mappedBy = "reservationDay")
     private List<UsersReservation> usersReservationList;
+
+    @ManyToOne
+    private AutoskolaOrganization autoskolaOrganization;
 
 }

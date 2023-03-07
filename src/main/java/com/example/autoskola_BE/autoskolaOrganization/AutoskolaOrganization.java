@@ -2,6 +2,7 @@ package com.example.autoskola_BE.autoskolaOrganization;
 
 
 import com.example.autoskola_BE.images.Image;
+import com.example.autoskola_BE.reservation.ReservationDay;
 import com.example.autoskola_BE.security.user.UserEntity;
 import com.example.autoskola_BE.waitingRoom.WaitingRoom;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -44,5 +45,9 @@ public class AutoskolaOrganization {
     @JsonIgnore
     @OneToMany(mappedBy = "userEntityMembers")
     private Set<UserEntity> userEntitySet;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "autoskolaOrganization")
+    private List<ReservationDay> reservationDay;
 
 }
