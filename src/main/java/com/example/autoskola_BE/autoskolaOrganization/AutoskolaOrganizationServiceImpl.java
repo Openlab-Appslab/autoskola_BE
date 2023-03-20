@@ -60,4 +60,6 @@ public class AutoskolaOrganizationServiceImpl implements AutoskolaOrganizationSe
             userRepository.save(currentStudent);
         }
     }
+
+
 }
