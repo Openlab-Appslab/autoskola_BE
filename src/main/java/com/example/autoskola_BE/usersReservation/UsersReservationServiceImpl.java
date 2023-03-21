@@ -93,9 +93,11 @@ public class UsersReservationServiceImpl implements UsersReservationService{
 
         for(ReservationDay reservationDay : reservationDayList){
 
+        List<UsersReservation> currentList =  reservationRepository.findAllByReservationDay(reservationDay);
+            usersReservationArrayList.addAll(currentList);
         }
 
-        return (List<UsersReservation>) reservationRepository.findAll();
+        return usersReservationArrayList;
 
     }
 }
