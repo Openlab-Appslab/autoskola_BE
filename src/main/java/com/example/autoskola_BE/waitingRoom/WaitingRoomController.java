@@ -3,7 +3,6 @@ package com.example.autoskola_BE.waitingRoom;
 import com.example.autoskola_BE.autoskolaOrganization.AutoskolaOrganization;
 import com.example.autoskola_BE.security.user.CurrentUser;
 import com.example.autoskola_BE.security.user.UserEntity;
-import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 public class WaitingRoomController {
@@ -53,7 +53,7 @@ public class WaitingRoomController {
     }
 
     @GetMapping("/returnCurrentOrganization")
-    public AutoskolaOrganization getCurreAutoskolaOrganization(@AuthenticationPrincipal CurrentUser currentUser) {
+    public Optional<AutoskolaOrganization> getCurreAutoskolaOrganization(@AuthenticationPrincipal CurrentUser currentUser) {
         return waitingRoomService.returnCurrentAutoskolaOrganization(currentUser);
     }
 }

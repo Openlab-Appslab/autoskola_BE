@@ -9,10 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 
 @Service
 public class WaitingRoomServiceImpl implements WaitingRoomService {
@@ -72,7 +69,16 @@ public class WaitingRoomServiceImpl implements WaitingRoomService {
         return userEntities;
     }
 
-    public AutoskolaOrganization returnCurrentAutoskolaOrganization(@AuthenticationPrincipal CurrentUser currentUser) {
-        return autoskolaOrganizationRepository.findByUserEntity(userRepository.findByUsername(currentUser.getUsername()));
+    public Optional<AutoskolaOrganization> returnCurrentAutoskolaOrganization(@AuthenticationPrincipal CurrentUser currentUser) {
+        UserEntity userEntity = userRepository.findByUsername(currentUser.getUsername());
+
+
+       if(Objects.equals(userEntity.getAuthority(), "STUDENT")){
+           return autoskolaOrganizationRepository.findById(userEntity.getUserEntityMembers().getId_organization());
+       }
+        else{
+        return Optional.ofNullable(autoskolaOrganizationRepository.findByUserEntity(userEntity));
+        }
+
     }
 }
