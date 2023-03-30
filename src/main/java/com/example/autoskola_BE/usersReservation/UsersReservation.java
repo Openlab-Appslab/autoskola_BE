@@ -21,7 +21,8 @@ public class UsersReservation {
 
     private String time;
 
-    private boolean accept = false;
+    @Column(nullable = true)
+    private boolean accept;
 
     @ManyToOne
     private ReservationDay reservationDay;

@@ -108,7 +108,7 @@ public class UsersReservationServiceImpl implements UsersReservationService{
 
     public void allowOrDelete(UsersReservation usersReservation){
         if (usersReservation.isAccept()){
-            UsersReservation usersReservation1 = reservationRepository.findByTimeAndReservationDay(usersReservation);
+            UsersReservation usersReservation1 = reservationRepository.findByTimeAndReservationDay(usersReservation.getTime(), usersReservation.getReservationDay());
             usersReservation1.setAccept(true);
 
             reservationRepository.save(usersReservation1);

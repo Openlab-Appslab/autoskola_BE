@@ -13,5 +13,5 @@ public interface UsersReservationRepository extends CrudRepository<UsersReservat
 //    List<UsersReservation> findAllBy
     List<UsersReservation> findAllByReservationDay(ReservationDay reservationDay);
 
-    UsersReservation findByTimeAndReservationDay(UsersReservation usersReservation);
+    UsersReservation findByTimeAndReservationDay(String time, ReservationDay reservationDay);
 }
