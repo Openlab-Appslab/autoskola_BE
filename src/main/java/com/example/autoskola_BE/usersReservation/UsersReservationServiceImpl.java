@@ -44,6 +44,7 @@ public class UsersReservationServiceImpl implements UsersReservationService{
 
         if (Objects.equals(reservation.getTime(), "7.00")){
             if (currentReservationDay.isClock7()) {
+                reservation.setAccept(false);
                 reservationRepository.save(reservation);
                 currentReservationDay.setClock7(false);
             }
@@ -51,6 +52,7 @@ public class UsersReservationServiceImpl implements UsersReservationService{
 
         if (Objects.equals(reservation.getTime(), "9.00")){
             if (currentReservationDay.isClock9()) {
+                reservation.setAccept(false);
                 reservationRepository.save(reservation);
                 currentReservationDay.setClock9(false);
             }
@@ -58,6 +60,7 @@ public class UsersReservationServiceImpl implements UsersReservationService{
 
         if (Objects.equals(reservation.getTime(), "12.00")){
             if (currentReservationDay.isClock12()) {
+                reservation.setAccept(false);
                 reservationRepository.save(reservation);
                 currentReservationDay.setClock12(false);
             }
@@ -65,6 +68,7 @@ public class UsersReservationServiceImpl implements UsersReservationService{
 
         if (Objects.equals(reservation.getTime(), "15.00")){
             if (currentReservationDay.isClock15()) {
+                reservation.setAccept(false);
                 reservationRepository.save(reservation);
                 currentReservationDay.setClock15(false);
             }
@@ -73,6 +77,7 @@ public class UsersReservationServiceImpl implements UsersReservationService{
 
         if (Objects.equals(reservation.getTime(), "17.00")){
             if (currentReservationDay.isClock17()) {
+                reservation.setAccept(false);
                 reservationRepository.save(reservation);
                 currentReservationDay.setClock17(false);
             }
@@ -100,4 +105,18 @@ public class UsersReservationServiceImpl implements UsersReservationService{
         return usersReservationArrayList;
 
     }
+
+    public void allowOrDelete(UsersReservation usersReservation){
+        if (usersReservation.isAccept()){
+            UsersReservation usersReservation1 = reservationRepository.findByTimeAndReservationDay(usersReservation);
+            usersReservation1.setAccept(true);
+
+            reservationRepository.save(usersReservation1);
+        }
+
+        else{
+            reservationRepository.deleteById(usersReservation.getId());
+        }
+    }
+
 }

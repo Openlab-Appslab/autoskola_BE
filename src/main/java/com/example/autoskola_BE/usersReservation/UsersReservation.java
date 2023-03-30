@@ -21,11 +21,14 @@ public class UsersReservation {
 
     private String time;
 
+    private boolean accept = false;
+
     @ManyToOne
     private ReservationDay reservationDay;
 
     @ManyToOne
     private UserEntity userEntity;
+
 
 
 
