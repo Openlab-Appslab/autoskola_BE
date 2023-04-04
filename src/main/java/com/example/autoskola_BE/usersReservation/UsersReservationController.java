@@ -27,8 +27,8 @@ public class UsersReservationController {
         return usersReservationService.returnAllRequests(currentUser);
     }
 
-    @PostMapping("/reservationAccpted")
-    void allowOrDelete(UsersReservation usersReservation){
+    @PostMapping("/reservationAccepted")
+    void allowOrDelete(@RequestBody UsersReservation usersReservation){
         usersReservationService.allowOrDelete(usersReservation);
     }
 

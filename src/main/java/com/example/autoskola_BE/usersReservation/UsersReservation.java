@@ -21,7 +21,7 @@ public class UsersReservation {
 
     private String time;
 
-    @Column(nullable = true)
+    @Column(nullable = false)
     private boolean accept;
 
     @ManyToOne
