@@ -11,7 +11,7 @@ import java.util.Optional;
 public interface UsersReservationRepository extends CrudRepository<UsersReservation, Long> {
 
 //    List<UsersReservation> findAllBy
-    List<UsersReservation> findAllByReservationDay(ReservationDay reservationDay);
+    List<UsersReservation> findAllByReservationDayAndAccept(ReservationDay reservationDay, boolean accept);
 
     UsersReservation findByTimeAndReservationDay(String time, ReservationDay reservationDay);
 }

@@ -22,9 +22,14 @@ public class UsersReservationController {
         usersReservationService.addReservation(reservation, currentUser);
     }
 
-    @GetMapping("/reservationForInstructor")
+    @GetMapping("/requestForInstructor")
     List<UsersReservation> returnReservationForInstructor (@AuthenticationPrincipal CurrentUser currentUser){
         return usersReservationService.returnAllRequests(currentUser);
+    }
+
+    @GetMapping("/acceptedForInstructor")
+    List<UsersReservation> returnAllAccepted (@AuthenticationPrincipal CurrentUser currentUser){
+        return usersReservationService.returnAllAccepted(currentUser);
     }
 
     @PostMapping("/reservationAccepted")

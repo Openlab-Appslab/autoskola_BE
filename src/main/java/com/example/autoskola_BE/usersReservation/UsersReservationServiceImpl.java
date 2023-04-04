@@ -98,7 +98,7 @@ public class UsersReservationServiceImpl implements UsersReservationService{
 
         for(ReservationDay reservationDay : reservationDayList){
 
-        List<UsersReservation> currentList =  reservationRepository.findAllByReservationDay(reservationDay);
+        List<UsersReservation> currentList =  reservationRepository.findAllByReservationDayAndAccept(reservationDay, false);
             usersReservationArrayList.addAll(currentList);
         }
 
@@ -106,6 +106,22 @@ public class UsersReservationServiceImpl implements UsersReservationService{
 
     }
 
+    public List<UsersReservation> returnAllAccepted(@AuthenticationPrincipal CurrentUser currentUser) {
+        UserEntity userEntity = userRepository.findByUsername(currentUser.getUsername());
+        AutoskolaOrganization autoskolaOrganization = autoskolaOrganizationRepository.findByUserEntity(userEntity);
+
+        List<ReservationDay> reservationDayList = reservationDayRepository.findAllByAutoskolaOrganization(autoskolaOrganization);
+
+        ArrayList<UsersReservation> usersReservationArrayList = new ArrayList<>();
+
+        for (ReservationDay reservationDay : reservationDayList) {
+
+            List<UsersReservation> currentList = reservationRepository.findAllByReservationDayAndAccept(reservationDay, true);
+            usersReservationArrayList.addAll(currentList);
+        }
+
+        return usersReservationArrayList;
+    }
     public void allowOrDelete(UsersReservation usersReservation){
         if (usersReservation.isAccept()){
             UsersReservation usersReservation1 = reservationRepository.findByTimeAndReservationDay(usersReservation.getTime(), usersReservation.getReservationDay());
