@@ -45,13 +45,13 @@ public class AppConfig extends WebSecurityConfigurerAdapter {
         ).and();
 
         http.authorizeRequests()
-                .antMatchers("/api/login").permitAll()
-                .antMatchers("/api/list").hasAnyAuthority("STUDENT")
-                .antMatchers("/api/studentRegister").permitAll()
-                .antMatchers("/api/instructorRegister").permitAll()
-                .antMatchers("/api/adminRegister").permitAll()
-                .antMatchers("/api/createOrganization").permitAll()
-                .antMatchers("/api/organization").permitAll()
+//                .antMatchers("/api/login").permitAll()
+//                .antMatchers("/api/list").hasAnyAuthority("STUDENT")
+//                .antMatchers("/api/studentRegister").permitAll()
+//                .antMatchers("/api/instructorRegister").permitAll()
+//                .antMatchers("/api/adminRegister").permitAll()
+//                .antMatchers("/api/createOrganization").permitAll()
+//                .antMatchers("/api/organization").permitAll()
                 .antMatchers(HttpMethod.GET).permitAll()
                 .antMatchers(HttpMethod.POST).permitAll()
                 .anyRequest().authenticated();

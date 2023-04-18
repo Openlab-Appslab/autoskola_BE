@@ -33,8 +33,13 @@ public class UsersReservationController {
     }
 
     @PostMapping("/reservationAccepted")
-    void allowOrDelete(@RequestBody UsersReservation usersReservation){
-        usersReservationService.allowOrDelete(usersReservation);
+    void allowOrDelete(@RequestBody UsersReservation usersReservation, @AuthenticationPrincipal CurrentUser currentUser){
+        usersReservationService.allowOrDelete(usersReservation, currentUser);
+    }
+
+    @PostMapping("/reservationDone")
+    void drivingDone(@RequestBody UsersReservation usersReservation){
+        usersReservationService.drivingDone(usersReservation);
     }
 
 }
