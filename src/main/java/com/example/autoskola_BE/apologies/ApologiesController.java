@@ -17,7 +17,7 @@ public class ApologiesController {
     private ApologiesServiceImpl apologiesService;
 
     @PostMapping("sendApologies")
-        void saveApology(@RequestBody Apologies apologies, @AuthenticationPrincipal CurrentUser currentUser){
+        void saveApology(@RequestBody ApologiesDto apologies, @AuthenticationPrincipal CurrentUser currentUser){
             apologiesService.saveApology(apologies, currentUser);
         }
     }

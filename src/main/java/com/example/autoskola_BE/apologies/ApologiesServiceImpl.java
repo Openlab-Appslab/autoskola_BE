@@ -15,12 +15,13 @@ public class ApologiesServiceImpl {
     @Autowired
     private ApologiesRepository apologiesRepository;
 
-    void saveApology(Apologies apologies, CurrentUser currentUser){
+    public void saveApology(ApologiesDto apologies, CurrentUser currentUser){
 
         UserEntity currentUserEntity = userRepository.findByUsername(currentUser.getUsername());
 
         Apologies apologies1 = new Apologies();
-        apologies1.setMessageToInstructor(apologies1.getMessageToInstructor());
+        apologies1.setMessageToInstructor(apologies.getMessageToInstructor());
+        apologies1.setDayOfApology(apologies.getDayOfApology());
         apologies1.setUsername(currentUserEntity.getUsername());
         apologiesRepository.save(apologies1);
 

@@ -25,5 +25,6 @@ public class Apologies {
 
     private String messageToInstructor;
 
+    private String dayOfApology;
 
 }
