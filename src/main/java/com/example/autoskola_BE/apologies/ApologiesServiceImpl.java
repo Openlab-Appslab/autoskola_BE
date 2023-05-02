@@ -46,4 +46,6 @@ public class ApologiesServiceImpl {
         return apologiesRepository.findAllByAutoskolaOrganization(autoskolaOrganization);
     }
 
+
+
 }

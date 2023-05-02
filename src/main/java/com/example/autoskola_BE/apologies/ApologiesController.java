@@ -18,6 +18,8 @@ public class ApologiesController {
 
     @Autowired
     private ApologiesServiceImpl apologiesService;
+    @Autowired
+    private ApologiesRepository apologiesRepository;
 
     @PostMapping("sendApologies")
         void saveApology(@RequestBody ApologiesDto apologies, @AuthenticationPrincipal CurrentUser currentUser){
@@ -27,6 +29,13 @@ public class ApologiesController {
         @GetMapping("getApologies")
         List<Apologies> apologies(@AuthenticationPrincipal CurrentUser currentUser){
          return apologiesService.getApologyByOrganiztion(currentUser);
+        }
+
+        @PostMapping("deleteApology")
+        void deleteApology(Apologies apologies){
+
+        apologiesRepository.deleteById(apologies.getId());
+
         }
     }
 

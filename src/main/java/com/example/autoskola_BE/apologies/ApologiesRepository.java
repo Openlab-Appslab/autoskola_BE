@@ -12,4 +12,6 @@ public interface ApologiesRepository extends CrudRepository<Apologies, Long>{
 
     List<Apologies> findAllByAutoskolaOrganization(AutoskolaOrganization autoskolaOrganization);
 
+    void deleteById(Long id);
+
 }
