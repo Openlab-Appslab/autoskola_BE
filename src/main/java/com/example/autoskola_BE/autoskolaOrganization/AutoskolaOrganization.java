@@ -1,6 +1,7 @@
 package com.example.autoskola_BE.autoskolaOrganization;
 
 
+import com.example.autoskola_BE.apologies.Apologies;
 import com.example.autoskola_BE.images.Image;
 import com.example.autoskola_BE.reservation.ReservationDay;
 import com.example.autoskola_BE.security.user.UserEntity;
@@ -49,5 +50,9 @@ public class AutoskolaOrganization {
     @JsonIgnore
     @OneToMany(mappedBy = "autoskolaOrganization")
     private List<ReservationDay> reservationDay;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "autoskolaOrganization")
+    private List<Apologies> apologies;
 
 }
