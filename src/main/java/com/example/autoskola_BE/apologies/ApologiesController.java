@@ -32,7 +32,7 @@ public class ApologiesController {
         }
 
         @PostMapping("deleteApology")
-        void deleteApology(Apologies apologies){
+        void deleteApology(@RequestBody Apologies apologies){
 
         apologiesRepository.deleteById(apologies.getId());
 
