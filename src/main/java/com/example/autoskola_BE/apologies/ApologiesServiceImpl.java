@@ -41,7 +41,7 @@ public class ApologiesServiceImpl {
     List<Apologies> getApologyByOrganiztion(CurrentUser currentUser){
 
         UserEntity currentUserEntity = userRepository.findByUsername(currentUser.getUsername());
-        AutoskolaOrganization autoskolaOrganization = currentUserEntity.getUserEntityMembers();
+        AutoskolaOrganization autoskolaOrganization = autoskolaOrganizationRepository.findByUserEntity(currentUserEntity);
 
         return apologiesRepository.findAllByAutoskolaOrganization(autoskolaOrganization);
     }
