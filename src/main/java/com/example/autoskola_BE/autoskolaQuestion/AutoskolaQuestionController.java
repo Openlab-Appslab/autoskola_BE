@@ -29,7 +29,7 @@ public class AutoskolaQuestionController {
     private ImageOfQuestionRepository imageOfQuestionRepository;
 
     @PostMapping("/saveQuestion")
-    void saveQuestion(@RequestBody AutoskolaQuestion autoskolaQuestion){
+    AutoskolaQuestion saveQuestion(@RequestBody AutoskolaQuestion autoskolaQuestion){
 
         if (autoskolaQuestion.getContainsImage()) {
             autoskolaQuestion.setContainsImage(true);
@@ -39,6 +39,9 @@ public class AutoskolaQuestionController {
         autoskolaQuestion.setAutoskolaTest(autoskolaTest.get());
         autoskolaQuestionRepository.save(autoskolaQuestion);
 
+
+//        return autoskolaQuestionRepository.findAutoskolaQuestionByTextOfQuestion(autoskolaQuestion.getTextOfQuestion());
+            return autoskolaQuestionRepository.findTopByOrderByIdDesc().get();
     }
 
     @PostMapping("/getAllQuestionsInTest")
