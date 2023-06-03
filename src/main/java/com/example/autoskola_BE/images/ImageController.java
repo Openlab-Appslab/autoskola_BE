@@ -26,7 +26,7 @@ public class ImageController {
         //Ukladá pomocou compresie obrazok v bytovoj podobe a jeho typ
         imageRepository.save(Image.builder()
                 .type(file.getContentType())
-                .image(ImageUtility.compressImage(file.getBytes())).build());
+                .image(ImageUtility.compressAndReduceImageQuality(file.getBytes(), file.getContentType())).build());
         return ResponseEntity.status(HttpStatus.OK)
                 .body(new ImageUploadResponse("Image uploaded successfully: " +
                         file.getOriginalFilename()));
