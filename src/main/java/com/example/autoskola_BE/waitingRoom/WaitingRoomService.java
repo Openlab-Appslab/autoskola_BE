@@ -12,7 +12,7 @@ public interface WaitingRoomService {
 
     void saveToWaitingRoom(WaitingRoom waitingRoom, @AuthenticationPrincipal CurrentUser currentUserService);
 
-    void saveStudentToOrganization(AutoskolaOrganization autoskolaOrganization, UserEntity userEntity);
+    void saveStudentToOrganization(AutoskolaOrganization autoskolaOrganization, UserEntity userEntity, @AuthenticationPrincipal CurrentUser instructor);
 
     List<WaitingRoom> returnUsersWaitingRoom(@AuthenticationPrincipal CurrentUser currentUser);
 

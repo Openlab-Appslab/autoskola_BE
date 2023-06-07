@@ -86,7 +86,7 @@ public class WaitingRoomServiceTest {
         when(userRepository.findById(1L)).thenReturn(currentUser);
 
         // Execute
-        waitingRoomService.saveStudentToOrganization(autoskolaOrganization, userEntity);
+        waitingRoomService.saveStudentToOrganization(autoskolaOrganization, userEntity, mock(CurrentUser.class));
 
         // Verify
         ArgumentCaptor<UserEntity> userEntityCaptor = ArgumentCaptor.forClass(UserEntity.class);

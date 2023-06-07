@@ -1,5 +1,7 @@
 package com.example.autoskola_BE.waitingRoom;
 
+import com.example.autoskola_BE.ChatContact.ChatContact;
+import com.example.autoskola_BE.ChatContact.ChatContactRepository;
 import com.example.autoskola_BE.autoskolaOrganization.AutoskolaOrganization;
 import com.example.autoskola_BE.autoskolaOrganization.AutoskolaOrganizationRepository;
 import com.example.autoskola_BE.security.user.CurrentUser;
@@ -23,6 +25,9 @@ public class WaitingRoomServiceImpl implements WaitingRoomService {
     @Autowired
     private AutoskolaOrganizationRepository autoskolaOrganizationRepository;
 
+    @Autowired
+    private ChatContactRepository chatContactRepository;
+
     @Override
     public void saveToWaitingRoom(WaitingRoom waitingRoom, @AuthenticationPrincipal CurrentUser currentUserService) {
 
@@ -31,11 +36,18 @@ public class WaitingRoomServiceImpl implements WaitingRoomService {
     }
 
     @Override
-    public void saveStudentToOrganization(AutoskolaOrganization autoskolaOrganization, UserEntity userEntity) {
+    public void saveStudentToOrganization(AutoskolaOrganization autoskolaOrganization, UserEntity userEntity, @AuthenticationPrincipal CurrentUser instructor) {
 
         Optional<UserEntity> currentUser = userRepository.findById(userEntity.getId());
         currentUser.get().setUserEntityMembers(autoskolaOrganization);
         userRepository.save(currentUser.get());
+
+       // waitingRoomRepository.delete(waitingRoomRepository.findByUserEntity(currentUser.get()));
+
+        ChatContact chatContact = new ChatContact();
+        chatContact.setFirstUser(userRepository.findByUsername(instructor.getUsername()));
+        chatContact.setSecondUser(currentUser.get());
+        chatContactRepository.save(chatContact);
 
     }
 

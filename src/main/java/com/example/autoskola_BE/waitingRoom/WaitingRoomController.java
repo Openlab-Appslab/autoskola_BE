@@ -25,8 +25,8 @@ public class WaitingRoomController {
     }
 
     @PostMapping("/addMembersToOrganization")
-    void addMembersToOrganization(@RequestBody WaitingRoom waitingRoom) {
-        waitingRoomService.saveStudentToOrganization(waitingRoom.getAutoskolaOrganization(), waitingRoom.getUserEntity());
+    void addMembersToOrganization(@RequestBody WaitingRoom waitingRoom, @AuthenticationPrincipal CurrentUser currentUser) {
+        waitingRoomService.saveStudentToOrganization(waitingRoom.getAutoskolaOrganization(), waitingRoom.getUserEntity(), currentUser);
     }
 
 

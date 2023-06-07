@@ -13,5 +13,7 @@ public interface WaitingRoomRepository extends CrudRepository<WaitingRoom, Long>
     List<WaitingRoom> findAllByUserEntity(UserEntity userEntity);
 
     List<WaitingRoom> findAllByAutoskolaOrganization(AutoskolaOrganization autoskolaOrganization);
+
+    WaitingRoom findByUserEntity(UserEntity userEntity);
 }
 
