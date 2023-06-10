@@ -1,5 +1,6 @@
 package com.example.autoskola_BE.usersReservation;
 
+import com.example.autoskola_BE.autoskolaOrganization.AutoskolaOrganization;
 import com.example.autoskola_BE.reservation.ReservationDay;
 import com.example.autoskola_BE.security.user.CurrentUser;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,6 +41,14 @@ public class UsersReservationController {
     @PostMapping("/reservationDone")
     void drivingDone(@RequestBody UsersReservation usersReservation){
         usersReservationService.drivingDone(usersReservation);
+    }
+
+
+    @GetMapping("/getInfoForStudent")
+    public List<UsersReservation> getInfoForStudent(@AuthenticationPrincipal CurrentUser currentUser){
+
+        return usersReservationService.getInfoForStudent(currentUser);
+
     }
 
 }

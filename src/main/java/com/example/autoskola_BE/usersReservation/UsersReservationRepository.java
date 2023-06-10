@@ -1,6 +1,7 @@
 package com.example.autoskola_BE.usersReservation;
 
 import com.example.autoskola_BE.reservation.ReservationDay;
+import com.example.autoskola_BE.security.user.UserEntity;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
@@ -15,4 +16,5 @@ public interface UsersReservationRepository extends CrudRepository<UsersReservat
 
     UsersReservation findByTimeAndReservationDay(String time, ReservationDay reservationDay);
 
+    List<UsersReservation> findAllByUserEntity(UserEntity userEntity);
 }

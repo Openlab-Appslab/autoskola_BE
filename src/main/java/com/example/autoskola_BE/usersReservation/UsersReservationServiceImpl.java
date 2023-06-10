@@ -192,4 +192,12 @@ public class UsersReservationServiceImpl implements UsersReservationService{
 
 
     }
+
+
+   public List<UsersReservation> getInfoForStudent(CurrentUser currentUser){
+
+        UserEntity userEntity = userRepository.findByUsername(currentUser.getUsername());
+
+        return reservationRepository.findAllByUserEntity(userEntity);
+   }
 }
